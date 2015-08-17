@@ -7,7 +7,11 @@ namespace MusicXml
     {
         public static void Write(Score score, XmlWriter writer)
         {
+            writer.WriteStartElement("score-partwise");
+            // REVIEW: what version should we be writing?
+            writer.WriteAttributeString("version", "3.0");
 
+            writer.WriteEndElement();
         }
     }
 }

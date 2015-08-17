@@ -26,6 +26,18 @@ namespace MusicXml.Unit.Tests
             }
 
             [Test]
+            public void RootElementIsScorePartwise()
+            {
+                Assert.That(_document.DocumentElement.Name, Is.EqualTo("score-partwise"));
+            }
+
+            [Test]
+            public void VersionIsThreeDotZero()
+            {
+                Assert.That(_document.DocumentElement.GetAttribute("version"), Is.EqualTo("3.0"));
+            }
+
+            [Test]
             public void MovementTitleIsNotWritten()
             {
                 Assert.That(_document.SelectSingleNode("score-partwise/movement-title"), Is.Null);
