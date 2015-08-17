@@ -52,7 +52,7 @@ namespace MusicXml
 							{
 								var measureWidthAttribute = measureNode.Attributes["width"];
 								if (measureWidthAttribute != null)
-									measure.Width = Convert.ToInt32(measureWidthAttribute.InnerText);
+									measure.Width = Convert.ToDouble(measureWidthAttribute.InnerText);
 							}
 
 							var attributesNode = measureNode.SelectSingleNode("attributes");
