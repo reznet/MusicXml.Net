@@ -21,6 +21,20 @@ namespace MusicXml
         {
             writer.WriteStartElement("part-list");
 
+            foreach(var part in score.Parts)
+            {
+                WritePart(part, writer);
+            }
+
+            writer.WriteEndElement();
+        }
+
+        private static void WritePart(Part part, XmlWriter writer)
+        {
+            writer.WriteStartElement("score-part");
+
+            writer.WriteAttributeString("id", part.Id);
+
             writer.WriteEndElement();
         }
     }
