@@ -2,6 +2,8 @@
 using MusicXml.Domain;
 using NUnit.Framework;
 using System.Xml;
+using Microsoft.XmlDiffPatch;
+using System.IO;
 
 namespace MusicXml.Unit.Tests
 {
@@ -94,9 +96,45 @@ namespace MusicXml.Unit.Tests
             [Test]
             public void MusicXmlWithChords()
             {
-                var document = WriteAndLoadScore(MusicXmlParser.GetScore("TestData/MusicXmlWithStaffValues.xml"));
+                const string sourcePath = @"TestData/MusicXmlOneMeasure.xml";
+                var document = WriteAndLoadScore(MusicXmlParser.GetScore(sourcePath));
 
                 // TODO diff xml in the test
+                XmlDiffOptions diffOptions = XmlDiffOptions.IgnoreComments | XmlDiffOptions.IgnoreDtd | XmlDiffOptions.IgnoreWhitespace | XmlDiffOptions.IgnoreXmlDecl;
+                var diff = new XmlDiff(diffOptions);
+
+
+                var same = false;
+                var readerSettings = new XmlReaderSettings()
+                {
+                    DtdProcessing = DtdProcessing.Ignore
+                };
+                using (var originalReader = XmlReader.Create(sourcePath, readerSettings))
+                using (var outputReader = XmlReader.Create("out.xml", readerSettings))
+                using (XmlWriter diffgramWriter = XmlWriter.Create("diff.xml"))
+                {
+                    same = diff.Compare(originalReader, outputReader, diffgramWriter);
+                }
+
+                if(!same)
+                {
+                    var view = new XmlDiffView();
+                    using (var reader = XmlReader.Create(sourcePath, readerSettings))
+                    using (var diffgramReader = XmlReader.Create("diff.xml"))
+                    {
+                        view.Load(reader, diffgramReader);
+
+                        using (var htmlWriter = new StreamWriter("diff.html"))
+                        {
+                            htmlWriter.Write("<html><body><table>");
+                            view.GetHtml(htmlWriter);
+                            htmlWriter.Write("</table></body></html>");
+                            Console.WriteLine("Open {0} to view xml differences", Path.GetFullPath("diff.html"));
+                        }
+                    }
+
+                    Assert.Fail("The xml written does not match the xml originally read.");
+                }
             }
         }
 
