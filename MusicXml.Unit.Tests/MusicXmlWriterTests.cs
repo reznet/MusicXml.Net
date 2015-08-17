@@ -54,34 +54,51 @@ namespace MusicXml.Unit.Tests
 
         public class WhenScoreHasSinglePart
         {
-            [TestFixture]
-            public class AndPartIsEmpty
+            [Test]
+            public void ThenPartListIsWritten()
             {
-                private XmlDocument _document;
+                var score = new Score();
+                score.Parts.Add(new Part());
 
-                [Test]
-                public void PartListIsWritten()
-                {
-                    var emptyScore = new Score();
-                    emptyScore.Parts.Add(new Part() { Id = "P1", Name = "Part 1" });
-                    using (XmlWriter writer = XmlWriter.Create("out.xml"))
-                    {
-                        MusicXmlWriter.Write(emptyScore, writer);
-                    }
+                var document = WriteAndLoadScore(score);
 
-                    _document = new XmlDocument();
-                    _document.Load("out.xml");
-
-                    var scorePart = _document.SelectSingleNode("score-partwise/part-list/score-part");
-                    Assert.That(scorePart, Is.Not.Null);
-                    var idAttribute = scorePart.Attributes["id"];
-                    Assert.That(idAttribute, Is.Not.Null);
-                    Assert.That(idAttribute.Value, Is.EqualTo("P1"));
-                    var partNameElement = scorePart.SelectSingleNode("part-name");
-                    Assert.That(partNameElement, Is.Not.Null);
-                    Assert.That(partNameElement.InnerText, Is.EqualTo("Part 1"));
-                }
+                var partList = document.SelectSingleNode("score-partwise/part-list");
+                Assert.That(partList, Is.Not.Null);
             }
+
+            [Test]
+            public void AndIdSetThenIdWritten()
+            {
+                var score = new Score();
+                score.Parts.Add(new Part() { Id = "P1" });
+
+                var document = WriteAndLoadScore(score);
+
+                Assert.That(document.SelectSingleNode("/score-partwise/part-list/score-part[@id='P1']"), Is.Not.Null);
+            }
+
+            public void AndNameSetThenNameWritten()
+            {
+                var score = new Score();
+                score.Parts.Add(new Part() { Id = "P1", Name = "Part 1" });
+
+                var document = WriteAndLoadScore(score);
+
+                Assert.That(document.SelectSingleNode("/score-partwise/part-list/score-part[@id='P1']/part-name[text()='Part 1']"), Is.Not.Null);
+            }
+        }
+
+        private static XmlDocument WriteAndLoadScore(Score score)
+        {
+            using (XmlWriter writer = XmlWriter.Create("out.xml"))
+            {
+                MusicXmlWriter.Write(score, writer);
+            }
+
+            var document = new XmlDocument();
+            document.Load("out.xml");
+
+            return document;
         }
     }
 }
