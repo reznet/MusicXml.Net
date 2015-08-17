@@ -63,7 +63,7 @@ namespace MusicXml.Unit.Tests
                 public void PartListIsWritten()
                 {
                     var emptyScore = new Score();
-                    emptyScore.Parts.Add(new Part() { Id = "P1" });
+                    emptyScore.Parts.Add(new Part() { Id = "P1", Name = "Part 1" });
                     using (XmlWriter writer = XmlWriter.Create("out.xml"))
                     {
                         MusicXmlWriter.Write(emptyScore, writer);
@@ -77,6 +77,9 @@ namespace MusicXml.Unit.Tests
                     var idAttribute = scorePart.Attributes["id"];
                     Assert.That(idAttribute, Is.Not.Null);
                     Assert.That(idAttribute.Value, Is.EqualTo("P1"));
+                    var partNameElement = scorePart.SelectSingleNode("part-name");
+                    Assert.That(partNameElement, Is.Not.Null);
+                    Assert.That(partNameElement.InnerText, Is.EqualTo("Part 1"));
                 }
             }
         }

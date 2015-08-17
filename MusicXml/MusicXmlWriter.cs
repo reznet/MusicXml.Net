@@ -35,6 +35,11 @@ namespace MusicXml
 
             writer.WriteAttributeString("id", part.Id);
 
+            if(!string.IsNullOrEmpty(part.Name))
+            {
+                writer.WriteElementString("part-name", part.Name);
+            }
+
             writer.WriteEndElement();
         }
     }
