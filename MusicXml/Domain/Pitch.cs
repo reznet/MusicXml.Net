@@ -4,17 +4,17 @@ namespace MusicXml.Domain
 {
 	public class Pitch
 	{
-		internal Pitch()
+		public Pitch()
 		{
 			Alter = 0;
 			Octave = 0;
-			Step = new Char();
+			Step = new char();
 		}
 
-		public int Alter { get; internal set; }
+		public int Alter { get; set; }
 
-		public int Octave { get; internal set; }
+		public int Octave { get; set; }
 
-		public char Step { get; internal set; }
+		public char Step { get; set; }
 	}
 }

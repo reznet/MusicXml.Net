@@ -7,17 +7,17 @@ namespace MusicXml.Domain
 
 	public class Time
 	{
-		internal Time()
+		public Time()
 		{
 			Beats = 0;
 			Mode = string.Empty;
 		}
 
-		public int Beats { get; internal set; }
+		public int Beats { get; set; }
 		
 		// Not really the mode rather which note gets the beat
-		public string Mode { get; internal set; }
+		public string Mode { get; set; }
 		
-		public TimeSymbol Symbol { get; internal set; }
+		public TimeSymbol Symbol { get; set; }
 	}
 }

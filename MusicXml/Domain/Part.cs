@@ -4,17 +4,17 @@ namespace MusicXml.Domain
 {
 	public class Part
 	{
-		internal Part()
+		public Part()
 		{
 			Id = string.Empty;
 			Name = string.Empty; 
 			Measures = new List<Measure>();	
 		}
 
-		public string Id { get; internal set; }
+		public string Id { get; set; }
 		
-		public string Name { get; internal set; }
+		public string Name { get; set; }
 		
-		public List<Measure> Measures { get; internal set; }
+		public List<Measure> Measures { get; private set; }
 	}
 }

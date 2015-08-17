@@ -11,12 +11,12 @@ namespace MusicXml.Domain
 
 	public class Lyric
 	{
-		internal Lyric()
+		public Lyric()
 		{
 		}
 
-		public Syllabic Syllabic { get; internal set; }
+		public Syllabic Syllabic { get; set; }
 		
-		public string Text { get; internal set; }
+		public string Text { get; set; }
 	}
 }

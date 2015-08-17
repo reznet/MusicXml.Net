@@ -2,14 +2,14 @@ namespace MusicXml.Domain
 {
 	public class Key
 	{
-		internal Key()
+		public Key()
 		{
 			Fifths = 0;
 			Mode = string.Empty;
 		}
 
-		public int Fifths { get; internal set; }
+		public int Fifths { get; set; }
 
-		public string Mode { get; internal set; }
+		public string Mode { get; set; }
 	}
 }

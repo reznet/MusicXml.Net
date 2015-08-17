@@ -17,11 +17,11 @@ namespace MusicXml.Domain
 			EncodingDate = new DateTime();
 		}
 
-		public string Software { get; internal set; }
+		public string Software { get; set; }
 	
-		public string Description { get; internal set; }
+		public string Description { get; set; }
 		
-		public DateTime EncodingDate { get; internal set; }
+		public DateTime EncodingDate { get; set; }
 		
 	}
 }

@@ -4,17 +4,17 @@ namespace MusicXml.Domain
 {
 	public class Measure
 	{
-		internal Measure()
+		public Measure()
 		{
 			Width = -1;
 			MeasureElements = new List<MeasureElement>();
 		}
 
-		public int Width { get; internal set; }
+		public int Width { get; set; }
 		
 		// This can be any musicXML element in the measure tag, i.e. note, backup, etc
-		public List<MeasureElement> MeasureElements { get; internal set; }
+		public List<MeasureElement> MeasureElements { get; private set; }
 		
-		public MeasureAttributes Attributes { get; internal set; }
+		public MeasureAttributes Attributes { get; set; }
 	}
 }

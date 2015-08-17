@@ -4,16 +4,16 @@ namespace MusicXml.Domain
 {
 	public class Score
 	{
-		internal Score()
+		public Score()
 		{
 			Parts = new List<Part>();
 			MovementTitle = string.Empty;
 		}
 
-		public string MovementTitle { get; internal set; }
+		public string MovementTitle { get; set; }
 
-		public Identification Identification { get; internal set; }
+		public Identification Identification { get; set; }
 
-		public List<Part> Parts { get; internal set; }
+		public List<Part> Parts { get; private set; }
 	}
 }

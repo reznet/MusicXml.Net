@@ -2,17 +2,17 @@ namespace MusicXml.Domain
 {
 	public class MeasureAttributes
 	{
-		internal MeasureAttributes()
+		public MeasureAttributes()
 		{
 			Divisions = 0;
 		}
 
-		public int Divisions { get; internal set; }
+		public int Divisions { get; set; }
 		
-		public Key Key { get; internal set; }
+		public Key Key { get; set; }
 		
-		public Time Time { get; internal set; }
+		public Time Time { get; set; }
 		 
-		public Clef Clef { get; internal set; }
+		public Clef Clef { get; set; }
 	}
 }
