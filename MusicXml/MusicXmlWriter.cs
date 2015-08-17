@@ -39,7 +39,7 @@ namespace MusicXml
         private static void WriteMeasure(Measure measure, int measureNumber, XmlWriter writer)
         {
             writer.WriteStartElement("measure");
-            writer.WriteElementString("number", measureNumber.ToString(CultureInfo.InvariantCulture));
+            writer.WriteAttributeString("number", measureNumber.ToString(CultureInfo.InvariantCulture));
 
             if(measure.Attributes != null)
             {
