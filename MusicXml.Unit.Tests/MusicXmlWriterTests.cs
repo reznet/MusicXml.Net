@@ -88,6 +88,18 @@ namespace MusicXml.Unit.Tests
             }
         }
 
+        [TestFixture]
+        public class ReadingAndWritingAFileProducesOriginalInput
+        {
+            [Test]
+            public void MusicXmlWithChords()
+            {
+                var document = WriteAndLoadScore(MusicXmlParser.GetScore("TestData/MusicXmlWithStaffValues.xml"));
+
+                // TODO diff xml in the test
+            }
+        }
+
         private static XmlDocument WriteAndLoadScore(Score score)
         {
             using (XmlWriter writer = XmlWriter.Create("out.xml"))
