@@ -74,6 +74,7 @@
     <Compile Include="Domain\Score.cs" />
     <Compile Include="Domain\Time.cs" />
     <Compile Include="MusicXmlParser.cs" />
+    <Compile Include="MusicXmlWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
